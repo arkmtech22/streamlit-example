@@ -1,84 +1,84 @@
-import streamlit as st
+#import the libraries
 import pandas as pd
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
-import plotly.figure_factory as ff
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
+from sklearn.multioutput import MultiOutputClassifier, MultiOutputRegressor
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import tree
+from sklearn.metrics import confusion_matrix, f1_score, accuracy_score, precision_score, recall_score, matthews_corrcoef, classification_report, recall_score, precision_recall_curve
 from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-import seaborn as sns
 from PIL import Image
+import streamlit as st
 
-df = pd.read_csv(r'diabetes.csv')
-st.sidebar.header('Patient Data')
-st.subheader('Training Dataset')
+st.write ("""
+#Diabetes Detection
+Detect if someone has diabetes using Random forest classifier
+""")
+#open and display
+image = Image.open('image.jpeg')
+st.image(image, caption='ML', use_column_width=True)
+
+#read the data
+df = pd.read_csv('diabetes.csv')
+
+#set subheader
+st.subheader('Data Information:')
+
+#show the table
+st.dataframe(df)
+#show statistics
 st.write(df.describe())
+chart =st.bar_chart(df)
 
-x = df.drop(['Outcome'], axis = 1)
-y = df.iloc[:, -1]
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.2, random_state = 0)
+#split the data into independent variables
+X = df.iloc[:, 0:8].values
+Y = df.iloc[:,-1].values
+#split the data into 75% training and 25% test
+X_train, X_test, Y_train, Y_test = train_test_split (X, Y, test_size =0.25, random_state=0)
 
-def user_report():
-  glucose = st.sidebar.slider('Glucose', 0,250, 120 )
-  insulin = st.sidebar.slider('Insulin', 0,850, 90 )
-  bp = st.sidebar.slider('Blood Pressure', 0,300, 85 )
-  bmi = st.sidebar.slider('BMI', 0,70, 22 )
-  dpf = st.sidebar.slider('Diabetes Pedigree Function', 0.0,3.0, 0.8 )
-  age = st.sidebar.slider('Age', 21,120, 55 )
-  pregnancies = st.sidebar.slider('Pregnancies', 0,10, 1 )
-  skinthickness = st.sidebar.slider('Skin Thickness', 0,100, 35 )
+#Get the feature input
+def get_user_input():
+    pregnancies = st.sidebar.slider('pregnancies', 0, 17, 3)
+    glucose = st.sidebar.slider('glucose', 0, 199, 117)
+    blood_pressure = st.sidebar.slider('blood_pressure', 0, 122, 72)
+    skin_thickness = st.sidebar.slider('skin_thickness', 0, 99, 23)
+    insulin = st.sidebar.slider('insulin', 0.0, 846.0, 30.5)
+    BMI = st.sidebar.slider('BMI', 0.0, 67.1, 32.0)
+    DPF = st.sidebar.slider('DPF', 0.078, 2.42, 0.3725)
+    age = st.sidebar.slider('age', 21, 81, 29)
 
-  user_report_data = {
-      'glucose':glucose,
-      'insulin':insulin,
-      'bp':bp,
-      'bmi':bmi,
-      'dpf':dpf,
-      'age':age,
-      'pregnancies':pregnancies,
-      'skinthickness':skinthickness,
-         
-  }
-  report_data = pd.DataFrame(user_report_data, index=[0])
-  return report_data
+    #store a dictonary into a variable
+    user_data = {'pregnancies': pregnancies,
+                'glucose': glucose,
+                'blood_pressure': blood_pressure,
+                'skin_thickness': skin_thickness,
+                'insulin': insulin,
+                'BMI': BMI,
+                'DPF': DPF,
+                'age': age
+                 }
+ #Transform data into data frame
+    features = pd.DataFrame(user_data, index =[0])
+    return  features
+#Store the userinput into a variable
+user_input = get_user_input()
 
+#set a subheader and display users input
+st.subheader('User Input:')
+st.write(user_input)
 
+#Create and train the model
+RandomForestClassifier=RandomForestClassifier()
+RandomForestClassifier.fit(X_train, Y_train)
 
-user_data = user_report()
-st.subheader('Patient Data')
-st.write(user_data)
+#Show the model metrics
+st.subheader('Model Test Accuracy Score:')
+st.write(str(accuracy_score(Y_test, RandomForestClassifier.predict(X_test)) * 100)+'%' )
 
-rf  = RandomForestClassifier()
-rf.fit(x_train, y_train)
-user_result = rf.predict(user_data)
+#store the model predictions in a variable
+prediction = RandomForestClassifier.predict(user_input)
 
-st.title('Graphical Patient Report')
-
-
-
-if user_result[0]==0:
-  color = 'blue'
-else:
-  color = 'red'
-
-
-st.header('Glucose Value Graph (Yours vs Others)')
-fig_glucose = plt.figure()
-ax3 = sns.scatterplot(x = 'Age', y = 'Glucose', data = df, hue = 'Outcome' , palette='Purples')
-ax4 = sns.scatterplot(x = user_data['age'], y = user_data['glucose'], s = 150, color = color)
-plt.xticks(np.arange(0,100,5))
-plt.yticks(np.arange(0,250,20))
-plt.title('0 - Healthy & 1 - Unhealthy')
-st.pyplot(fig_glucose)
-
-st.subheader('Your Report: ')
-output=''
-if user_result[0]==0:
-  output = 'Congratulations, you are not Diabetic'
-else:
-  output = 'Unfortunately, you are Diabetic'
-st.title(output)
-
-
+#set a subheader and display the classification
+st.subheader('Classification: ')
+st.write(prediction)
 
