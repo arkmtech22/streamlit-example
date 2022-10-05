@@ -1,3 +1,4 @@
+"""
 from collections import namedtuple
 import altair as alt
 import math
@@ -43,3 +44,17 @@ with st.echo(code_location='below'):
 width=500)
         .mark_circle(color='#0068c9', opacity=0.5)
         .encode(x='x:Q', y='y:Q'))
+"""
+    
+    
+    
+import streamlit as st
+import pandas as pd
+import mymodel as m
+
+st.write(""" #MY FIRST APP HELLO WORLD""")
+df = pd.read_csv("diabetes.csv")
+st.line_chart(df)
+
+window = st.slider("forecast diabetes")
+st.write(m.run(window=window))
