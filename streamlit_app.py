@@ -9,6 +9,7 @@ from sklearn.metrics import confusion_matrix, f1_score, accuracy_score, precisio
 from sklearn.metrics import accuracy_score
 from PIL import Image
 import streamlit as st
+import dataframe as df
 
 st.write ("""
 #Diabetes Detection
