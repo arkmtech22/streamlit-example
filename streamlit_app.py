@@ -81,8 +81,4 @@ else:
 st.title(output)
 
 
-//st.sidebar.subheader("""An article about this app: https://proskillocity.blogspot.com/2021/04/official-launch-of-our-first- web-app.html""")
-//st.write("Dataset citation : Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., & Johannes, R.S. (1988).  Using the            ADAP learning algorithm to forecast the onset of diabetes mellitus. In Proceedings of the Symposium on Computer Applications and Medical Care (pp. 261--265). IEEE Computer Society Press.")
-//st.write("Original owners of the dataset: Original owners: National Institute of Diabetes and Digestive and Kidney Diseases   (b) Donor of database: Vincent Sigillito (vgs@aplcen.apl.jhu.edu) Research Center, RMI Group Leader Applied Physics Laboratory  The Johns Hopkins University Johns Hopkins Road Laurel, MD 20707 (301) 953-6231 © Date received: 9 May 1990")
-//st.write("This dataset is also available on the UC Irvine Machine Learning Repository")
-//st.write("Dataset License: Open Data Commons Public Domain Dedication and License (PDDL)")
+
