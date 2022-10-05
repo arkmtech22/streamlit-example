@@ -1,4 +1,4 @@
-    #import the libraries
+#import the libraries
 import pandas as pd
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
@@ -12,8 +12,8 @@ import streamlit as st
 
 st.write ("""
 #Diabetes Detection
-Detect if someone has diabetes using Random forest classifier)
-
+Detect if someone has diabetes using Random forest classifier""")
+"""
 #open and display
 image = Image.open('image.jpeg')
 st.image(image, caption='ML', use_column_width=True)
