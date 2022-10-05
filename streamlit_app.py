@@ -10,18 +10,7 @@ from sklearn.metrics import accuracy_score
 from PIL import Image
 import streamlit as st
 import dataframe as df
-
-st.write ("""
-#Diabetes Detection
-Detect if someone has diabetes using Random forest classifier""")
-"""
-#open and display
-image = Image.open('image.jpeg')
-st.image(image, caption='ML', use_column_width=True)
-"""
-#read the data
 df = pd.read_csv('diabetes.csv')
-
 #set subheader
 st.subheader('Data Information:')
 
