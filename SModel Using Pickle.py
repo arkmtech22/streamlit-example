@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[1]:
-
-
 # Save Model Using Pickle
 import pandas
 from sklearn import model_selection
@@ -24,17 +20,11 @@ model.fit(X_train, Y_train)
 # save the model to disk
 filename = 'finalized_model.sav'
 pickle.dump(model, open(filename, 'wb'))
-
 # some time later...
-
 # load the model from disk
 loaded_model = pickle.load(open(filename, 'rb'))
 result = loaded_model.score(X_test, Y_test)
 print(result)
-
-
-# In[2]:
-
 
 import pandas
 from sklearn import model_selection
@@ -56,20 +46,10 @@ model.fit(X_train, Y_train)
 filename = 'finalized_model.sav'
 pickle.dump(model, open(filename, 'wb'))
 
-
-# In[3]:
-
-
-# some time later...
-
 # load the model from disk
 loaded_model = pickle.load(open(filename, 'rb'))
 result = loaded_model.score(X_test, Y_test)
 print(result)
-
-
-# In[1]:
-
 
 #import the libraries
 import pandas as pd
@@ -153,16 +133,3 @@ prediction = RandomForestClassifier.predict(user_input)
 #set a subheader and display the classification
 st.subheader('Classification: ')
 st.write(prediction)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
