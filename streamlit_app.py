@@ -68,7 +68,7 @@ image = Image.open('image.jpeg')
 st.image(image, caption='ML', use_column_width=True)
 """
 #read the data
-df = pd.read_csv('diabetes.csv')
+df = pd.read_csv("diabetes.csv")
 
 #set subheader
 st.subheader('Data Information:')
