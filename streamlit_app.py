@@ -12,12 +12,12 @@ import streamlit as st
 
 st.write ("""
 #Diabetes Detection
-Detect if someone has diabetes using Random forest classifier
-""")
+Detect if someone has diabetes using Random forest classifier)
+
 #open and display
 image = Image.open('image.jpeg')
 st.image(image, caption='ML', use_column_width=True)
-
+"""
 #read the data
 df = pd.read_csv('diabetes.csv')
 
