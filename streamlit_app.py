@@ -1,4 +1,7 @@
 #diabetes detector
+#First ML App deployemnt on Streamlit
+#Works perfectly!
+#85+ accuracy, not bad Pranav
 
 #import statements
 import streamlit as st
