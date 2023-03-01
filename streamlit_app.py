@@ -181,18 +181,38 @@ else:
   output = 'Unfortunately, you are Diabetic'
 st.title(output)
 
-#Most important for users
-st.subheader('Lets raise awareness for diabetes and show our support for diabetes awareness and help many patients around the world.')
-st.write("World Diabetes Day: 14 November")
+# #Most important for users
+# st.subheader('Lets raise awareness for diabetes and show our support for diabetes awareness and help many patients around the world.')
+# st.write("World Diabetes Day: 14 November")
 
-st.sidebar.subheader("""An article first-web-app.html""")
-st.write("Dataset citation .")
-st.write("Original owners of the dataset: Original owners: National Institute of Diabetes and Digestive and Kidney Diseases (b) Donor of database: Vincent Sigillito (vgs@aplcen.apl.jhu.edu) Research Center, RMI Group Leader Applied Physics Laboratory The Johns Hopkins University Johns Hopkins Road Laurel, MD 20707 (301) 953-6231 © Date received: 9 May 1990")
-st.write("This dataset is also available on the UC Irvine Machine Learning Repository")
-st.write("Dataset License: Open Data Commons Public Domain Dedication and License (PDDL)")
+# st.sidebar.subheader("""An article first-web-app.html""")
+# st.write("Dataset citation .")
+# st.write("Original owners of the dataset: Original owners: National Institute of Diabetes and Digestive and Kidney Diseases (b) Donor of database: Vincent Sigillito (vgs@aplcen.apl.jhu.edu) Research Center, RMI Group Leader Applied Physics Laboratory The Johns Hopkins University Johns Hopkins Road Laurel, MD 20707 (301) 953-6231 © Date received: 9 May 1990")
+# st.write("This dataset is also available on the UC Irvine Machine Learning Repository")
+# st.write("Dataset License: Open Data Commons Public Domain Dedication and License (PDDL)")
 
-st.write("Disclaimer: This is just a learning project based on one particular dataset so please do not depend on it to actually know if you have diabetes or not. It might still be a false positive or false negative. A doctor is still the best fit for the determination of such diseases.")
-image = Image.open('killocity (3).png')
+# st.write("Disclaimer: This is just a learning project based on one particular dataset so please do not depend on it to actually know if you have diabetes or not. It might still be a false positive or false negative. A doctor is still the best fit for the determination of such diseases.")
+# image = Image.open('killocity (3).png')
 
-st.image(image, use_column_width=True)
+# st.image(image, use_column_width=True)
 
+st.sidebar.header('Diabetes Prediction')
+select = st.sidebar.selectbox('Select Form', ['Form 1'], key='1')
+if not st.sidebar.checkbox("Hide", True, key='1'):
+    st.title('Diabetes Prediction(Only for females above 21years of    Age)')
+    name = st.text_input("Name:")
+    pregnancy = st.number_input("No. of times pregnant:")
+    glucose = st.number_input("Plasma Glucose Concentration :")
+    bp =  st.number_input("Diastolic blood pressure (mm Hg):")
+    skin = st.number_input("Triceps skin fold thickness (mm):")
+    insulin = st.number_input("2-Hour serum insulin (mu U/ml):")
+    bmi = st.number_input("Body mass index (weight in kg/(height in m)^2):")
+    dpf = st.number_input("Diabetes Pedigree Function:")
+    age = st.number_input("Age:")
+submit = st.button('Predict')
+if submit:
+        prediction = classifier.predict([[pregnancy, glucose, bp, skin, insulin, bmi, dpf, age]])
+        if prediction == 0:
+            st.write('Congratulation',name,'You are not diabetic')
+        else:
+            st.write(name," we are really sorry to say but it seems like you are Diabetic.")
