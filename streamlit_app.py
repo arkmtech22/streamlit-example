@@ -197,7 +197,7 @@ st.title(output)
 # st.image(image, use_column_width=True)
 
 st.sidebar.header('Diabetes Prediction')
-select = st.sidebar.selectbox('Select Form', ['Form 1'], key='1')
+# select = st.sidebar.selectbox('Select Form', ['Form 1'], key='1')
 select = st.sidebar.selectbox('Select Form', ['Decision Tree'], key='1')
 if not st.sidebar.checkbox("Hide", True, key='1'):
     st.title('Diabetes Prediction(Only for females above 21years of    Age)')
