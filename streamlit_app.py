@@ -236,3 +236,5 @@ app.add_app("All t-Tests", allttests.app)
 app.add_app("Chi-Square", chisquare.app)
 app.add_app("Linear Regression", linearregression.app)
 app.add_app("ANOVA", anova.app)
+# The main app
+app.run()
