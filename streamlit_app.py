@@ -232,7 +232,8 @@ from sklearn.cluster import KMeans
 import skfuzzy as fuzz
 
 # Load the diabetes dataset
-diabetes_df = pd.read_csv("/content/drive/My Drive/COLAB/diabetes.csv")
+# diabetes_df = pd.read_csv("/content/drive/My Drive/COLAB/diabetes.csv")
+diabetes_df = pd.read_csv(r'diabetes.csv')
 
 # Split the dataset into features and labels
 X = diabetes_df.iloc[:, :-1].values
