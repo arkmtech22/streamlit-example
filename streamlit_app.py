@@ -229,10 +229,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.cluster import KMeans
-pip install scikit-fuzzy
+# pip install scikit-fuzzy
 import numpy as np
 import skfuzzy as fuzz
-import skfuzzy as fuzz
+# import skfuzzy as fuzz
 
 # Load the diabetes dataset
 # diabetes_df = pd.read_csv("/content/drive/My Drive/COLAB/diabetes.csv")
