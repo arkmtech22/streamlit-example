@@ -181,45 +181,6 @@ else:
   output = 'Unfortunately, you are Diabetic'
 st.title(output)
 
-import streamlit as st
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-import xgboost as xgb
-import lightgbm as lgb
-
-# Load data
-# data = pd.read_csv('diabetes.csv')
-data = pd.read_csv(r'diabetes.csv')
-# data = pd.read_csv("/content/drive/My Drive/COLAB/diabetes.csv")
-
-# Preprocess data
-X = data.iloc[:, :-1]
-y = data.iloc[:, -1]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Define XGBoost model
-xgb_model = xgb.XGBClassifier()
-xgb_model.fit(X_train, y_train)
-y_pred_xgb = xgb_model.predict(X_test)
-
-# Define LightGBM model
-lgb_model = lgb.LGBMClassifier()
-lgb_model.fit(X_train, y_train)
-y_pred_lgb = lgb_model.predict(X_test)
-
-# Evaluation metrics
-st.write('XGBoost Accuracy:', accuracy_score(y_test, y_pred_xgb))
-st.write('XGBoost Precision:', precision_score(y_test, y_pred_xgb))
-st.write('XGBoost Recall:', recall_score(y_test, y_pred_xgb))
-st.write('XGBoost F1 Score:', f1_score(y_test, y_pred_xgb))
-
-st.write('LightGBM Accuracy:', accuracy_score(y_test, y_pred_lgb))
-st.write('LightGBM Precision:', precision_score(y_test, y_pred_lgb))
-st.write('LightGBM Recall:', recall_score(y_test, y_pred_lgb))
-st.write('LightGBM F1 Score:', f1_score(y_test, y_pred_lgb))
-
-
 
 
 
