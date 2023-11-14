@@ -1,4 +1,13 @@
 # Import necessary modules
+
+import warnings
+import numpy as np
+
+# Suppress the deprecation warning about np.bool
+warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
+
+import streamlit as st
+
 import streamlit as st
 
 
