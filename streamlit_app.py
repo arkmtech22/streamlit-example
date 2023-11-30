@@ -1,14 +1,10 @@
 # Import necessary modules
-
 import warnings
 import numpy as np
-
+import streamlit as st
+import pandas as pd
 # Suppress the deprecation warning about np.bool
-warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
-
-import streamlit as st
-
-import streamlit as st
+# warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
 
 
 # Create a Streamlit app
@@ -41,9 +37,6 @@ user_input = {
 # Display user input data
 st.sidebar.subheader("User Input Data:")
 st.sidebar.write(user_input)
-
-import streamlit as st
-import pandas as pd
 
 # Upload the Pima Indian Diabetes dataset
 st.sidebar.header("Upload Pima Indian Diabetes Dataset")
