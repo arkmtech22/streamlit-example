@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 import pandas as pd
 # Suppress the deprecation warning about np.bool
-# warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
+warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
 
 # Upload the Pima Indian Diabetes dataset
 st.sidebar.header("Upload Pima Indian Diabetes Dataset")
