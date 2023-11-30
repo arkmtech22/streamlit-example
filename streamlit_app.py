@@ -3,12 +3,16 @@ import warnings
 import numpy as np
 import streamlit as st
 import pandas as pd
+
 # Suppress the deprecation warning about np.bool
 warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
 
 # Upload the Pima Indian Diabetes dataset
 st.sidebar.header("Upload Pima Indian Diabetes Dataset")
 uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
+
+# Initialize the DataFrame variable
+df = None
 
 # Check if a file was uploaded
 if uploaded_file is not None:
@@ -20,7 +24,6 @@ if uploaded_file is not None:
     st.write(df)
 else:
     st.sidebar.warning("Upload a CSV file to load the dataset.")
-
 
 # Define the number of rows to display at a time
 rows_to_display = 10
@@ -37,10 +40,17 @@ st.write(f"Displaying rows {start_idx + 1} to {end_idx} of {len(df)}")
 st.write(df.iloc[start_idx:end_idx])
 
 # Allow users to navigate between pages
-if st.button("Previous Page", key="previous"):
-    page = max(1, page - 1)
-if st.button("Next Page", key="next"):
-    page = min((len(df) - 1) // rows_to_display + 1, page + 1)
+if 'df' in globals():
+    if st.button("Previous Page", key="previous"):
+        page = max(1, page - 1)
+    if st.button("Next Page", key="next"):
+        page = min((len(df) - 1) // rows_to_display + 1, page + 1)
+
+# ... (rest of your code)
+
+
+
+
 
 
 # Create a Streamlit app
