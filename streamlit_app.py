@@ -7,23 +7,21 @@ import pandas as pd
 # Suppress the deprecation warning about np.bool
 warnings.filterwarnings("ignore", category=FutureWarning, module="numpy")
 
-# Upload the Pima Indian Diabetes dataset
-st.sidebar.header("Upload Pima Indian Diabetes Dataset")
-uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
+# Define the URL for the Pima Indian Diabetes dataset
+dataset_url = "https://www.kaggle.com/datasets/kumargh/pimaindiansdiabetescsv"
 
-# Initialize the DataFrame variable
-df = None
+# Read the CSV file into a Pandas DataFrame
+@st.cache
+def load_data(url):
+    df = pd.read_csv(url)
+    return df
 
-# Check if a file was uploaded
-if uploaded_file is not None:
-    # Read the CSV file into a Pandas DataFrame
-    df = pd.read_csv(uploaded_file)
+# Load the dataset
+df = load_data(dataset_url)
 
-    # Display the dataset
-    st.write("Pima Indian Diabetes Dataset")
-    st.write(df)
-else:
-    st.sidebar.warning("Upload a CSV file to load the dataset.")
+# Display the dataset
+st.write("Pima Indian Diabetes Dataset")
+st.write(df)
 
 # Define the number of rows to display at a time
 rows_to_display = 10
@@ -40,18 +38,12 @@ st.write(f"Displaying rows {start_idx + 1} to {end_idx} of {len(df)}")
 st.write(df.iloc[start_idx:end_idx])
 
 # Allow users to navigate between pages
-if 'df' in globals():
-    if st.button("Previous Page", key="previous"):
-        page = max(1, page - 1)
-    if st.button("Next Page", key="next"):
-        page = min((len(df) - 1) // rows_to_display + 1, page + 1)
+if st.button("Previous Page", key="previous"):
+    page = max(1, page - 1)
+if st.button("Next Page", key="next"):
+    page = min((len(df) - 1) // rows_to_display + 1, page + 1)
 
 # ... (rest of your code)
-
-
-
-
-
 
 # Create a Streamlit app
 st.title("Pima Diabetes Prediction App")
@@ -83,5 +75,3 @@ user_input = {
 # Display user input data
 st.sidebar.subheader("User Input Data:")
 st.sidebar.write(user_input)
-
-
